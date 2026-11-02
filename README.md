@@ -19,28 +19,43 @@
 
 ## 装
 
-DSH 的插件安装走 pnpm，命令是 `dsh plugin`，**`--profile` 不能省**（后面跟的 `add` 等是 pnpm 参数）：
+分两种情况，**先看你用的是哪个 DSH**——这一步踩过坑：
+
+### 桌面版（Electron 应用）
+
+**命令行装不了**。桌面版的 profile 由应用独占管理，`dsh plugin --profile desktop ...`
+会直接报 `profile "desktop" is managed exclusively by the Electron application`。
+
+在应用里装：
+
+1. 设置 → 插件（或者插件市场）
+2. 装 `github:wuying1630/dsh-selfmem`，或者搜 `dsh-selfmem`
+
+### web / headless / 自己起的 profile
+
+命令行装，`--profile` 不能省（后面的 `add` 是 pnpm 参数）：
 
 ```bash
-# 从本地目录装（开发时用）
-dsh plugin --profile desktop add link:C:/path/to/dsh-selfmem
+dsh plugin --profile web add github:wuying1630/dsh-selfmem
 
-# 从 GitHub 装
-dsh plugin --profile desktop add github:wuying1630/dsh-selfmem
+# 或者从 npm（发布之后）
+dsh plugin --profile web add dsh-selfmem
 
-# 从 npm 装（发布之后）
-dsh plugin --profile desktop add dsh-selfmem
+# 或者从本地目录（开发时用）
+dsh plugin --profile web add link:C:/path/to/dsh-selfmem
 ```
 
-把 `desktop` 换成你自己的 profile 名（`dsh web` 默认是 `web`）。
+把 `web` 换成你自己的 profile 名。
 
-装的时候会自动把 `dsh-selfmem` 加进 `dsh.profile.bundles`。**没自动加的话手动补**：
+### 装完检查
+
+会自动把 `dsh-selfmem` 加进 `dsh.profile.bundles`。**没自动加的话手动补**：
 
 ```json
 { "dsh": { "profile": { "bundles": ["...", "dsh-selfmem"] } } }
 ```
 
-装完重启 DSH，工具表里会多出 `selfnote` / `judge` / `handoff` 三个工具。
+重启 DSH，工具表里会多出 `selfnote` / `judge` / `handoff` 三个工具。
 
 ## 用
 
