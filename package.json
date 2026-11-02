@@ -1,0 +1,14 @@
+{
+  "name": "dsh-selfmem",
+  "version": "0.1.0",
+  "description": "给会断片的模型三本账：自我笔记（我变成什么样了）、判断账本（记下判断到期回头核）、交接条（这一轮停在哪）。数据存 JSONL，与同名命令行脚本共用同一份。",
+  "type": "module",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "keywords": ["dsh", "dsh-bundle", "memory", "self-note", "handoff"],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}
